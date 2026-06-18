@@ -1,0 +1,29 @@
+{
+    "name": "XTRON PRO GAME MOVE 1",
+    "description": "A fun game to pass the time! Challenge your friends and family to beat your high score in this game anyone can play!",
+    "dependencies": {
+        "device": "*",
+        "darts": "*",
+        "controller": "*"
+    },
+    "files": [
+        "main.blocks",
+        "main.ts",
+        "README.md",
+        "assets.json",
+        "tilemap.g.jres",
+        "tilemap.g.ts",
+        "main.py"
+    ],
+    "testFiles": [
+        "test.ts"
+    ],
+    "targetVersions": {
+        "target": "4.0.14",
+        "targetId": "arcade"
+    },
+    "supportedTargets": [
+        "arcade"
+    ],
+    "preferredEditor": "blocksprj"
+}
