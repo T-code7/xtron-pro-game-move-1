@@ -2,86 +2,87 @@ namespace SpriteKind {
     export const thing = SpriteKind.create()
     export const FIRE = SpriteKind.create()
 }
-
-controller.A.onEvent(ControllerButtonEvent.Pressed, function on_a_pressed() {
-    
+controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     pause(1000)
     ARROW = sprites.createProjectileFromSprite(img`
-            . . . . . . . . . . . . . . . .
-            . . . . . . . . . . . . . . . .
-            . . . . . . . . . . . . . . . .
-            . . . . . . . . . . . . . . . .
-            . . . . . . . . . . . . . . . .
-            . . . . . . . . . . . . . . . .
-            1 . . . . . . . . . . . f f . .
-            . 1 . . . . . . . . . . . f f .
-            1 . e e e e e e e e e e e e f f
-            . 1 . . . . . . . . . . . f f .
-            1 . . . . . . . . . . . f f . .
-            . . . . . . . . . . . . . . . .
-            . . . . . . . . . . . . . . . .
-            . . . . . . . . . . . . . . . .
-            . . . . . . . . . . . . . . . .
-            . . . . . . . . . . . . . . . .
-            `, YES_PLAY, 50, 50)
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        1 . . . . . . . . . . . f f . . 
+        . 1 . . . . . . . . . . . f f . 
+        1 . e e e e e e e e e e e e f f 
+        . 1 . . . . . . . . . . . f f . 
+        1 . . . . . . . . . . . f f . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `, YES_PLAY, 50, 50)
     ARROW.follow(BAD, 100)
 })
-info.onCountdownEnd(function on_countdown_end() {
-    tiles.setCurrentTilemap(tilemap`
-        level2
-        `)
+info.onCountdownEnd(function () {
+    tiles.setCurrentTilemap(tilemap`level2`)
 })
-sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Player, function on_on_overlap(sprite: Sprite, otherSprite: Sprite) {
+sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Player, function (sprite, otherSprite) {
     info.changeCountdownBy(-120)
     game.gameOver(true)
 })
-sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function on_on_overlap2(sprite2: Sprite, otherSprite2: Sprite) {
+sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite2, otherSprite2) {
     sprites.destroy(ARROW)
-    animation.runMovementAnimation(BAD, animation.animationPresets(animation.shake), 100, false)
+    animation.runMovementAnimation(
+    BAD,
+    animation.animationPresets(animation.shake),
+    100,
+    false
+    )
     BAD.startEffect(effects.fire, 500)
     info.changeScoreBy(1)
     sprites.destroy(ARROW)
 })
-let ARROW : Sprite = null
-let YES_PLAY : Sprite = null
-let BAD : Sprite = null
+let ARROW: Sprite = null
+let YES_PLAY: Sprite = null
+let BAD: Sprite = null
 info.startCountdown(30)
 BAD = sprites.create(img`
-        2 2 2 2 f 2 2 2 2 2 2 f 2 2 2 2
-        2 2 2 2 2 f 2 2 2 2 f 2 2 2 2 2
-        2 2 2 f 2 2 f 2 2 f 2 2 f 2 2 2
-        2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
-        2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
-        2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
-        2 2 2 2 f f f f f f f 2 2 2 2 2
-        2 2 2 f 2 2 2 2 2 2 2 f 2 2 2 2
-        2 2 f 2 2 2 2 2 2 2 2 2 f 2 2 2
-        2 f 2 2 2 2 2 2 2 2 2 2 2 f 2 2
-        2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
-        2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
-        2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
-        2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
-        2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
-        2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
-        `, SpriteKind.Enemy)
+    2 2 2 2 f 2 2 2 2 2 2 f 2 2 2 2 
+    2 2 2 2 2 f 2 2 2 2 f 2 2 2 2 2 
+    2 2 2 f 2 2 f 2 2 f 2 2 f 2 2 2 
+    2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+    2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+    2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+    2 2 2 2 f f f f f f f 2 2 2 2 2 
+    2 2 2 f 2 2 2 2 2 2 2 f 2 2 2 2 
+    2 2 f 2 2 2 2 2 2 2 2 2 f 2 2 2 
+    2 f 2 2 2 2 2 2 2 2 2 2 2 f 2 2 
+    2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+    2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+    2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+    2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+    2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+    2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+    `, SpriteKind.Enemy)
 YES_PLAY = sprites.create(img`
-        . . . . . . . . . . . . . . . .
-        e . a a a a a a a a a a a a a .
-        1 e a . . . . . . . . . . . a .
-        1 a a . . . 3 . . . . 3 . . a a
-        1 a a e . . . . . . . . . . a a
-        1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
-        1 . . . . e . . . . . . . . . .
-        1 . 3 . . . e . . . . . . . 3 .
-        1 . . 3 3 3 3 3 3 3 3 3 3 3 . .
-        1 . . . . . . . e . . . . . . .
-        1 . . . . c c c c c c c . . . .
-        1 c c c c c c c c c c c c c c c
-        1 c c c c c c c c c c c c c c c
-        1 c c c c c c c c c c c c c c c
-        1 c c c c c c c c c c c c c c c
-        1 c c c c c c c c c c c c c c c
-        `, SpriteKind.Player)
+    . . . . . . . . . . . . . . . . 
+    e . a a a a a a a a a a a a a . 
+    1 e a . . . . . . . . . . . a . 
+    1 a a . . . 3 . . . . 3 . . a a 
+    1 a a e . . . . . . . . . . a a 
+    1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+    1 . . . . e . . . . . . . . . . 
+    1 . 3 . . . e . . . . . . . 3 . 
+    1 . . 3 3 3 3 3 3 3 3 3 3 3 . . 
+    1 . . . . . . . e . . . . . . . 
+    1 . . . . c c c c c c c . . . . 
+    1 c c c c c c c c c c c c c c c 
+    1 c c c c c c c c c c c c c c c 
+    1 c c c c c c c c c c c c c c c 
+    1 c c c c c c c c c c c c c c c 
+    1 c c c c c c c c c c c c c c c 
+    `, SpriteKind.Player)
 controller.moveSprite(YES_PLAY)
 YES_PLAY.setPosition(19, 49)
 music.play(music.melodyPlayable(music.thump), music.PlaybackMode.LoopingInBackground)
@@ -210,7 +211,7 @@ scene.setBackgroundImage(img`
 YES_PLAY.setStayInScreen(true)
 BAD.setStayInScreen(true)
 BAD.follow(YES_PLAY, 30)
-forever(function on_forever() {
+forever(function () {
     pause(30000)
     sprites.destroy(ARROW)
 })
